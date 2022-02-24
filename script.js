@@ -46,6 +46,7 @@ function prepareStudents() {
     student.profilePic = getProfilePic(stud.fullname.trim());
     allStudents.push(student);
   });
+  displayList(allStudents);
 }
 
 function getFirstName(fullname) {
@@ -158,4 +159,31 @@ function cleanData(data) {
   const cleanedData = capitalizeFirstLetter + lowercaseTheRest;
 
   return cleanedData;
+}
+
+function buildList() {
+  displayList();
+}
+
+function displayList(students) {
+  document.querySelector("#container").innerHTML = "";
+
+  // build a new list
+  students.forEach(displayStudent);
+}
+
+function displayStudent(student) {
+  // create clone
+  const clone = document
+    .querySelector("#loop_template")
+    .content.cloneNode(true);
+
+  // set clone data
+  clone.querySelector("#firstname").textContent = student.firstName;
+  clone.querySelector("#lastname").textContent = student.lastName;
+  clone.querySelector("#gender").textContent = student.gender;
+  clone.querySelector("#house").textContent = student.house;
+  clone.querySelector("img").src = student.profilePic;
+
+  document.querySelector("#container").appendChild(clone);
 }
