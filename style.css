@@ -1,0 +1,183 @@
+@font-face {
+  font-family: harryPotterFont;
+  src: url(harry_p/HARRYP__.TTF);
+}
+
+/* ------------ mobile first ------------- */
+
+.hide {
+  display: none;
+}
+body {
+  margin: 0%;
+  background-image: url(background/bookshelf.webp);
+}
+header {
+  height: 50vw;
+  width: 100%;
+  /* background-image: url(background/books.webp); */
+  text-align: center;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  padding-top: 4vw;
+}
+
+.h1 {
+  display: grid;
+  grid-row: 2/3;
+  text-align: center;
+  color: white;
+  font-family: harryPotterFont;
+  font-size: 30px;
+  text-shadow: 10px 10px 20px black;
+}
+
+main {
+  background-image: url(background/parchment.webp);
+  margin: 2rem;
+  border-radius: 5px;
+  box-shadow: 20px -20px 30px rgba(109, 108, 108, 0.575);
+}
+
+#background_box {
+  display: grid;
+  place-content: center;
+}
+
+button {
+  list-style: none;
+  text-decoration: none;
+  border: none;
+  padding: 8px;
+  background-color: #321403;
+  cursor: pointer;
+  color: white;
+}
+
+#container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+#loopview_article {
+  border: 3px dotted black;
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  padding: 1rem;
+  width: 15rem;
+  /* place-content: center; */
+}
+#loopview_article .fullname {
+  display: flex;
+  justify-self: center;
+  gap: 8px;
+  font-family: harryPotterFont;
+  font-size: 1.7rem;
+}
+
+.filtersort {
+  text-align: center;
+}
+
+#sorting {
+  display: inline-block;
+  margin: 1rem;
+}
+#sorting button {
+  margin: 5px;
+}
+.filtrering {
+  display: inline-block;
+  margin: 1rem;
+}
+.filtrering button {
+  margin: 5px;
+}
+
+#searchBar {
+  padding: 13px;
+  width: 243px;
+  background-color: #321403;
+  color: white;
+  border: none;
+  text-align: center;
+  border-radius: 20px;
+}
+#searchwrapper {
+  display: grid;
+  place-content: center;
+  padding: 3rem;
+}
+
+#loopview_article button {
+  max-width: 50px;
+}
+
+/* -------------- ipad---------------- */
+
+@media (min-width: 600px) {
+  header {
+    height: 30vw;
+  }
+  .h1 {
+    font-size: 40px;
+  }
+  #container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  #loopview_article {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+}
+
+@media (min-width: 900px) {
+  .h1 {
+    font-size: 60px;
+  }
+  #container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+  }
+
+  #loopview_article {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  #popup {
+    position: fixed;
+    background-color: rgba(199, 144, 144, 0.726);
+    border-radius: 20px;
+    width: 100vw;
+    height: 100vw;
+    left: 0;
+    top: 0;
+    overflow: scroll;
+  }
+  #article_popup {
+    display: grid;
+    place-content: center;
+    max-width: 30vw;
+    height: 40vw;
+    margin: 2rem auto;
+    padding: 5px;
+    border-radius: 25px;
+    background-color: white;
+  }
+
+  #popup_fullname {
+    display: flex;
+    gap: 3px;
+  }
+}

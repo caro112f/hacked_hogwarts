@@ -9,6 +9,11 @@ const Student = {
   profilePic: "",
   house: "",
 };
+const settings = {
+  filterBy: "all",
+  sortBy: "first_name",
+  sortDir: "asc",
+};
 //make an empty array that can contain all students
 const allStudents = [];
 
@@ -23,8 +28,11 @@ window.addEventListener("DOMContentLoaded", start);
 //start function, calls to load JSON function
 function start() {
   console.log("hej Hogwarts");
+
+  buttonListener();
   loadJSON();
 }
+
 //hent json data with async function
 async function loadJSON() {
   const jsonData = await fetch(url);
@@ -146,6 +154,9 @@ function getProfilePic(fullname) {
     );
     const profilePic = `images/${secondLastNameLowerCase}_${smallFirstLetterOfFirstName}.png`;
     return profilePic;
+  } else if (lastNameLowerCase === "leanne") {
+    const profilePic = `images/default.png`;
+    return profilePic;
   } else {
     const profilePic = `images/${lastNameLowerCase}_${smallFirstLetterOfFirstName}.png`;
     return profilePic;
@@ -161,8 +172,128 @@ function cleanData(data) {
   return cleanedData;
 }
 
+function buttonListener() {
+  const filterButtons = document.querySelectorAll('[data-action="filter"]');
+  const sortButtons = document.querySelectorAll("[data-action='sort']");
+  const searchBar = document.querySelector("#searchBar");
+
+  searchBar.addEventListener("keyup", searchFunction);
+
+  filterButtons.forEach((button) =>
+    button.addEventListener("click", selectFilter)
+  );
+  sortButtons.forEach((knap) => knap.addEventListener("click", selectSort));
+}
+function selectFilter(event) {
+  //filter on a criteria
+  const filter = event.target.dataset.filter;
+  console.log(`User selected ${filter}`);
+  setFilter(filter);
+}
+
+function setFilter(filter) {
+  settings.filterBy = filter;
+  console.log("setfilter");
+  buildList();
+}
+function studentFilter(filteredList) {
+  //let filteredList = allAnimals;
+  //get filter depending on data-filter attribute
+  //filter allAnimals with correct filter function  and put it into filteredAnimals
+  if (settings.filterBy === "gryffindor") {
+    filteredList = allStudents.filter(isGryffindor);
+  } else if (settings.filterBy === "hufflepuff") {
+    filteredList = allStudents.filter(isHufflepuff);
+  } else if (settings.filterBy === "ravenclaw") {
+    filteredList = allStudents.filter(isRavenclaw);
+  } else if (settings.filterBy === "slytherin") {
+    filteredList = allStudents.filter(isSlytherin);
+  }
+  return filteredList;
+  //displayList(filteredList);
+}
+function isGryffindor(student) {
+  if (student.house === "Gryffindor") {
+    return true;
+  } else {
+    return false;
+  }
+}
+function isHufflepuff(student) {
+  if (student.house === "Hufflepuff") {
+    return true;
+  } else {
+    return false;
+  }
+}
+function isRavenclaw(student) {
+  if (student.house === "Ravenclaw") {
+    return true;
+  } else {
+    return false;
+  }
+}
+function isSlytherin(student) {
+  if (student.house === "Slytherin") {
+    return true;
+  } else {
+    return false;
+  }
+}
+function selectSort(event) {
+  const sortBy = event.target.dataset.sort;
+  const sortDir = event.target.dataset.sortDirection;
+
+  //toggle the direction
+  if (sortDir === "asc") {
+    event.target.dataset.sortDirection = "desc";
+  } else {
+    event.target.dataset.sortDirection = "asc";
+  }
+
+  setSort(sortBy, sortDir);
+}
+
+function setSort(sortBy, sortDir) {
+  settings.sortBy = sortBy;
+  settings.sortDir = sortDir;
+  buildList();
+}
+function sortedStudents(sortedList) {
+  //let sortedList = allAnimals;
+  let direction = 1;
+  if (settings.sortDir === "desc") {
+    direction = -1;
+  } else {
+    settings.direction = 1;
+  }
+
+  sortedList = sortedList.sort(sortByProperty);
+
+  function sortByProperty(a, b) {
+    console.log("clicked");
+    if (a[settings.sortBy] < b[settings.sortBy]) {
+      return -1 * direction;
+    } else {
+      return 1 * direction;
+    }
+  }
+  return sortedList;
+}
 function buildList() {
-  displayList();
+  const currentList = studentFilter(allStudents);
+  console.log(currentList);
+  const sortedList = sortedStudents(currentList);
+
+  displayList(sortedList);
+}
+
+function searchFunction(element) {
+  const searchString = element.target.value.toLowerCase();
+  const filteredStudents = allStudents.filter((student) => {
+    return student.firstName.toLowerCase().includes(searchString);
+  });
+  displayList(filteredStudents);
 }
 
 function displayList(students) {
@@ -184,6 +315,24 @@ function displayStudent(student) {
   clone.querySelector("#gender").textContent = student.gender;
   clone.querySelector("#house").textContent = student.house;
   clone.querySelector("img").src = student.profilePic;
+  clone
+    .querySelector("#more_info")
+    .addEventListener("click", () => showDetails(student));
 
   document.querySelector("#container").appendChild(clone);
 }
+
+function showDetails(studentData) {
+  const popup = document.querySelector("#popup");
+  popup.classList.remove("hide");
+  popup.querySelector("#popup_firstname").textContent = studentData.firstName;
+  popup.querySelector("#popup_nickname").textContent = studentData.nickName;
+  popup.querySelector("#popup_middlename").textContent = studentData.middleName;
+  popup.querySelector("#popup_lastname").textContent = studentData.lastName;
+  popup.querySelector("#popup_gender").textContent = studentData.gender;
+  popup.querySelector("#popup_house").textContent = studentData.house;
+  popup.querySelector("img").src = studentData.profilePic;
+}
+document
+  .querySelector("#close")
+  .addEventListener("click", () => popup.classList.add("hide"));
