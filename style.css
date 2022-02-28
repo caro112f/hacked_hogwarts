@@ -48,6 +48,7 @@ button {
   list-style: none;
   text-decoration: none;
   border: none;
+  border-radius: 5px;
   padding: 8px;
   background-color: #321403;
   cursor: pointer;
@@ -114,9 +115,17 @@ button {
   padding: 3rem;
 }
 
-#loopview_article button {
+#loopview_article #more_info {
   max-width: 50px;
 }
+#loopview_article #expel_student {
+  max-width: 80px;
+}
+#loopview_article button {
+  max-width: 50px;
+  margin: 0.5rem;
+}
+
 #popup {
   position: fixed;
   background-color: rgba(175, 175, 175, 0.849);
@@ -165,6 +174,9 @@ button {
   padding: 5px;
   border-radius: 25px;
   background-color: white;
+}
+#warning_remove_other button {
+  margin: 0.5rem;
 }
 
 /* -------------- ipad---------------- */

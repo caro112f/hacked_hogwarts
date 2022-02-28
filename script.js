@@ -405,7 +405,6 @@ function showDetails(studentData) {
         return false;
       }
     });
-
     console.log("prefects", prefects);
 
     //there should only be one of each gender for each house
@@ -419,7 +418,6 @@ function showDetails(studentData) {
         return false;
       }
     });
-
     console.log("isOtherPrefectOfSameGender", isOtherPrefectOfSameGender);
     console.log("otherPrefect", otherPrefect);
 
