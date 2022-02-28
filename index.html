@@ -82,10 +82,14 @@
             </div>
             <p id="popup_gender"></p>
             <p id="popup_house"></p>
+            <div class="prefect">
+              <button id="prefect">Make prefect</button>
+            </div>
+
             <!-- <p id="popup_bloodstatus"></p>
           <p id="popup_prefect"></p>
           <p id="popup_club"></p> -->
-            <div id="close"><button>Luk</button></div>
+            <div id="close"><button>Close</button></div>
           </article>
         </section>
         <section id="container"></section>
@@ -99,8 +103,25 @@
             <p id="gender"></p>
             <p id="house"></p>
             <div class="info_button"><button id="more_info">Info</button></div>
+            <div class="expel_button">
+              <button id="expel_student">Expel student</button>
+            </div>
           </article>
         </template>
+      </div>
+      <div id="warning_section" class="hide">
+        <article id="warning_remove_other">
+          <h1>
+            Warning: There can only be one prefect of each gender in each house
+          </h1>
+          <div id="name_other_prefect">
+            <p id="other_prefect_name"></p>
+          </div>
+          <div><button id="close_warning_other">Close</button></div>
+          <div>
+            <button id="remove_the_other">Remove the other prefect</button>
+          </div>
+        </article>
       </div>
     </main>
 
