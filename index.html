@@ -41,8 +41,8 @@
           <button class="filter" data-action="filter" data-filter="expelled">
             Expelled Students
           </button>
-          <button class="filter" data-action="filter" data-filter="active">
-            Active Students
+          <button class="filter" data-action="filter" data-filter="prefect">
+            Prefects
           </button>
         </div>
         <div id="sorting">
@@ -64,9 +64,9 @@
           <button
             data-action="sort"
             data-sort-direction="asc"
-            data-sort="prefects"
+            data-sort="house"
           >
-            Prefects
+            House
           </button>
         </div>
       </div>
@@ -82,8 +82,10 @@
             </div>
             <p id="popup_gender"></p>
             <p id="popup_house"></p>
+            <p id="bloodstatus"></p>
             <div class="prefect">
-              <button id="prefect">Make prefect</button>
+              <h2 id="popup_prefect_status"></h2>
+              <button data-field="prefect">Make prefect</button>
             </div>
 
             <!-- <p id="popup_bloodstatus"></p>
@@ -102,6 +104,7 @@
             </div>
             <p id="gender"></p>
             <p id="house"></p>
+            <p id="prefect_status"></p>
             <div class="info_button"><button id="more_info">Info</button></div>
             <div class="expel_button">
               <button id="expel_student">Expel student</button>
@@ -114,10 +117,13 @@
           <h2>
             Warning: There can only be one prefect of each gender in each house
           </h2>
+          <div id="name_this_prefect">
+            <p id="this_prefect_name"></p>
+          </div>
           <div id="name_other_prefect">
             <p id="other_prefect_name"></p>
           </div>
-          <div><button id="close_warning_other">Close</button></div>
+          <div><button id="close_warning">Cancel this prefect</button></div>
           <div>
             <button id="remove_the_other">Remove the other prefect</button>
           </div>
