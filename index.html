@@ -44,6 +44,13 @@
           <button class="filter" data-action="filter" data-filter="prefect">
             Prefects
           </button>
+          <button
+            class="filter"
+            data-action="filter"
+            data-filter="squad_members"
+          >
+            Members of Inquisitorial Squad
+          </button>
         </div>
         <div id="sorting">
           <label for="sortby">Sort by:</label>
@@ -87,7 +94,7 @@
               <button data-field="prefect">Make prefect</button>
             </div>
             <div class="in_club">
-              <button data-field="club">Admit to Inquisitorial Squad</button>
+              <button data-field="club"></button>
             </div>
 
             <!-- <p id="popup_bloodstatus"></p>
@@ -129,6 +136,15 @@
           <div>
             <button id="remove_the_other">Remove the other prefect</button>
           </div>
+        </article>
+      </div>
+      <div id="club_warning_section" class="hide">
+        <article id="warning_club">
+          <h2>
+            Warning: Only Purebloods or students from Slytherin can be added to
+            the Inquisitorial Club
+          </h2>
+          <div><button id="close_club_warning">Close warning</button></div>
         </article>
       </div>
     </main>

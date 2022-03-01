@@ -182,6 +182,31 @@ button {
   margin: 0.5rem;
 }
 
+#club_warning_section {
+  position: fixed;
+  background-color: rgba(175, 175, 175, 0.849);
+  width: 100vw;
+  height: 100%;
+  left: 0;
+  top: 0;
+  overflow: scroll;
+  text-align: center;
+}
+
+#warning_club {
+  display: grid;
+  place-content: center;
+  max-width: 15rem;
+  height: auto;
+  margin: 2rem auto;
+  padding: 5px;
+  border-radius: 25px;
+  background-color: white;
+}
+#close_club_warning button {
+  margin: 0.5rem;
+}
+
 /* -------------- ipad---------------- */
 
 @media (min-width: 600px) {

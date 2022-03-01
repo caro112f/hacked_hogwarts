@@ -11,6 +11,7 @@ const Student = {
   expelled: false,
   prefect: false,
   bloodstatus: "",
+  InqSquad: false,
 };
 const settings = {
   filterBy: "all",
@@ -66,6 +67,7 @@ function prepareStudents() {
     student.expelled = false;
     student.prefect = false;
     student.bloodstatus = getBloodStatus(student);
+    student.InqSquad = false;
     allStudents.push(student);
   });
   displayList(allStudents);
@@ -235,10 +237,20 @@ function studentFilter(list) {
       list = list.filter(isSlytherin);
     } else if (settings.filterBy === "prefect") {
       list = list.filter(isPrefect);
+    } else if (settings.filterBy === "InqSquad") {
+      list = list.filter(isSquadMember);
     }
     //displayList(filteredList);
   }
   return list;
+}
+
+function isSquadMember(student) {
+  if (student.InqSquad === true) {
+    return true;
+  } else {
+    return false;
+  }
 }
 function isGryffindor(student) {
   if (student.house === "Gryffindor") {
@@ -391,21 +403,35 @@ function showDetails(student) {
   popup.querySelector("img").src = student.profilePic;
 
   if (student.prefect === true) {
-    document.querySelector('[data-field="prefect"]').textContent = "⭐ prefect";
+    document.querySelector('[data-field="prefect"]').textContent = "⭐ Prefect";
   } else {
-    document.querySelector('[data-field="prefect"]').textContent = "★ prefect";
+    document.querySelector('[data-field="prefect"]').textContent =
+      "★ Not prefect";
+  }
+
+  if (student.InqSquad === true) {
+    document.querySelector('[data-field="club"]').textContent =
+      "💎 Inquisitorial Member";
+  } else {
+    document.querySelector('[data-field="club"]').textContent =
+      "♦ Not Inquisitorial Member";
   }
 
   popup.querySelector("#close").addEventListener("click", closePopup);
   document
     .querySelector('[data-field="prefect"]')
     .addEventListener("click", clickPrefectCallBack);
-  //eventlisteners på #close button
+
+  document
+    .querySelector('[data-field="club"]')
+    .addEventListener("click", clickInqSquadCallBack);
 
   function clickPrefectCallBack(event) {
     clickPrefect(student);
   }
-
+  function clickInqSquadCallBack(event) {
+    clickInqSquad(student);
+  }
   function closePopup() {
     document.querySelector("#close").removeEventListener("click", closePopup);
 
@@ -416,6 +442,9 @@ function showDetails(student) {
     popup
       .querySelector('[data-field="prefect"]')
       .removeEventListener("click", clickPrefectCallBack);
+    popup
+      .querySelector('[data-field="club"]')
+      .removeEventListener("click", clickInqSquadCallBack);
   }
   //   popup.querySelector("#make_prefect").addEventListener("click", clickPrefect);
 }
@@ -425,6 +454,20 @@ function clickPrefect(student) {
     student.prefect = false;
   } else {
     tryToMakePrefect(student);
+
+    //buildList(); - skal kun bruges hvis vi vil tilsætte ikonerne
+  }
+}
+
+function clickInqSquad(student) {
+  if (student.InqSquad === true) {
+    student.InqSquad = false;
+    document.querySelector('[data-field="club"]').textContent =
+      "♦ Not Inquisitorial Member";
+    console.log("not a member anymore");
+  } else {
+    console.log("not member now, try to make one");
+    tryToMakeMember(student);
 
     //buildList(); - skal kun bruges hvis vi vil tilsætte ikonerne
   }
@@ -503,4 +546,31 @@ function closeWarning() {
   document
     .querySelector("#close_warning")
     .removeEventListener("click", closeWarning);
+}
+
+function tryToMakeMember(student) {
+  if (student.house === "Slytherin" || student.bloodstatus === "Pureblood") {
+    student.InqSquad = true;
+    document.querySelector('[data-field="club"]').textContent =
+      "💎 Inquisitorial Member";
+  } else {
+    student.InqSquad = false;
+    document.querySelector('[data-field="club"]').textContent =
+      "♦ Not Inquisitorial Member";
+    showClubWarning();
+  }
+}
+
+function showClubWarning() {
+  document.querySelector("#club_warning_section").classList.remove("hide");
+  document
+    .querySelector("#close_club_warning")
+    .addEventListener("click", closeClubWarning);
+
+  function closeClubWarning() {
+    document.querySelector("#club_warning_section").classList.add("hide");
+    document
+      .querySelector("#close_club_warning")
+      .removeEventListener("click", closeClubWarning);
+  }
 }
