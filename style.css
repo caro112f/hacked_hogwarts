@@ -11,6 +11,15 @@
 .hide {
   display: none;
 }
+.chosen {
+  background-color: #914944;
+  color: white;
+}
+button:hover {
+  background-color: #914944;
+  color: white;
+}
+
 body {
   margin: 0%;
   background-image: url(background/bookshelf.webp);
@@ -32,7 +41,12 @@ header {
   color: white;
   font-family: HarryFont;
   font-size: 30px;
-  text-shadow: 10px 10px 20px black;
+  text-shadow: 10px 10px 20px #360704;
+}
+
+p {
+  font-family: "Hubballi", cursive;
+  font-size: 20px;
 }
 
 main {
@@ -53,7 +67,7 @@ button {
   border: none;
   border-radius: 5px;
   padding: 8px;
-  background-color: #321403;
+  background-color: #360704;
   cursor: pointer;
   color: white;
 }
@@ -61,19 +75,18 @@ button {
 #container {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
   text-align: center;
   padding: 2rem;
 }
 
 #loopview_article {
-  border: 3px dotted black;
-  border-radius: 20px;
+  border-radius: 10px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   padding: 1rem;
   width: 15rem;
+  margin: 1rem;
   /* place-content: center; */
 }
 #loopview_article .fullname {
@@ -119,10 +132,10 @@ button {
 }
 
 #loopview_article #more_info {
-  max-width: 50px;
+  max-width: 80px;
 }
 #loopview_article #expel_student {
-  max-width: 80px;
+  max-width: 150px;
 }
 #loopview_article button {
   max-width: 50px;
@@ -139,6 +152,10 @@ button {
   overflow: scroll;
   text-align: center;
 }
+#popup button {
+  background-color: white;
+  color: black;
+}
 #article_popup {
   display: grid;
   place-content: center;
@@ -151,13 +168,22 @@ button {
 }
 
 #popup_fullname {
+  justify-content: center;
   display: flex;
-  gap: 3px;
+  margin: 0;
+  font-family: HarryFont;
+  font-size: 1.7rem;
+}
+#popup_fullname h2 {
+  padding-left: 6px;
 }
 #popup button {
   margin: 1rem;
 }
-#warning_section {
+#popup_img {
+  margin-top: 1rem;
+}
+.warning {
   position: fixed;
   background-color: rgba(175, 175, 175, 0.849);
   width: 100vw;
@@ -168,7 +194,7 @@ button {
   text-align: center;
 }
 
-#warning_remove_other {
+.warning_article {
   display: grid;
   place-content: center;
   max-width: 15rem;
@@ -182,29 +208,30 @@ button {
   margin: 0.5rem;
 }
 
-#club_warning_section {
-  position: fixed;
-  background-color: rgba(175, 175, 175, 0.849);
-  width: 100vw;
-  height: 100%;
-  left: 0;
-  top: 0;
-  overflow: scroll;
-  text-align: center;
+.display_counter {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  /* gap: 30px; */
 }
-
-#warning_club {
-  display: grid;
-  place-content: center;
-  max-width: 15rem;
-  height: auto;
-  margin: 2rem auto;
-  padding: 5px;
-  border-radius: 25px;
-  background-color: white;
+.display_counter p {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+#close button {
+  margin-left: 13rem;
 }
 #close_club_warning button {
   margin: 0.5rem;
+}
+.symbols {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+#isMember,
+#prefect_status {
+  font-size: 30px;
 }
 
 /* -------------- ipad---------------- */
@@ -227,7 +254,13 @@ button {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
   }
+  #article_popup {
+    max-width: 20rem;
+    height: auto;
+  }
 }
+
+/* ----------------------- web version ------------------ */
 @media (min-width: 900px) {
   .h1 {
     font-size: 60px;
@@ -243,8 +276,8 @@ button {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
   }
-  #article_popup {
-    max-width: 20rem;
-    height: auto;
+
+  #close button {
+    margin-left: 17rem;
   }
 }

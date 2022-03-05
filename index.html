@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hacked Hogwarts</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hubballi&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header>
@@ -23,7 +29,7 @@
       <div class="filtersort">
         <div class="filtrering">
           <label for="filterby">Filter by:</label>
-          <button class="filter" data-action="filter" data-filter="*">
+          <button class="filter chosen" data-action="filter" data-filter="*">
             All
           </button>
           <button class="filter" data-action="filter" data-filter="gryffindor">
@@ -44,11 +50,7 @@
           <button class="filter" data-action="filter" data-filter="prefect">
             Prefects
           </button>
-          <button
-            class="filter"
-            data-action="filter"
-            data-filter="squad_members"
-          >
+          <button class="filter" data-action="filter" data-filter="InqSquad">
             Members of Inquisitorial Squad
           </button>
         </div>
@@ -77,16 +79,28 @@
           </button>
         </div>
       </div>
+      <div class="counter_wrapper">
+        <div class="display_counter">
+          <p id="num_active_students"></p>
+          <p id="num_expelled_students"></p>
+          <p id="num_current_display"></p>
+          <p id="num_gryffindor"></p>
+          <p id="num_hufflepuff"></p>
+          <p id="num_slytherin"></p>
+          <p id="num_ravenclaw"></p>
+        </div>
+      </div>
       <div id="background_box">
         <section id="popup" class="hide">
           <article id="article_popup">
-            <div><img src="" alt="" /></div>
+            <div id="close"><button>✖</button></div>
+            <div id="popup_img"><img src="" alt="" /></div>
             <div id="popup_fullname">
               <h2 id="popup_firstname"></h2>
-              <h2 id="popup_nickname"></h2>
               <h2 id="popup_middlename"></h2>
               <h2 id="popup_lastname"></h2>
             </div>
+            <h3 id="popup_nickname"></h3>
             <p id="popup_gender"></p>
             <p id="popup_house"></p>
             <p id="bloodstatus"></p>
@@ -94,13 +108,12 @@
               <button data-field="prefect">Make prefect</button>
             </div>
             <div class="in_club">
-              <button data-field="club"></button>
+              <button data-field="InqSquad"></button>
             </div>
 
             <!-- <p id="popup_bloodstatus"></p>
           <p id="popup_prefect"></p>
           <p id="popup_club"></p> -->
-            <div id="close"><button>Close</button></div>
           </article>
         </section>
         <section id="container"></section>
@@ -113,16 +126,21 @@
             </div>
             <p id="gender"></p>
             <p id="house"></p>
-            <p id="prefect_status"></p>
-            <div class="info_button"><button id="more_info">Info</button></div>
+            <div class="symbols">
+              <p id="prefect_status" class="hide">⭐</p>
+              <p id="isMember" class="hide">💎</p>
+            </div>
+            <div class="info_button">
+              <button id="more_info">More Info</button>
+            </div>
             <div class="expel_button">
               <button id="expel_student">Expel student</button>
             </div>
           </article>
         </template>
       </div>
-      <div id="warning_section" class="hide">
-        <article id="warning_remove_other">
+      <div id="warning_section" class="warning hide">
+        <article id="warning_remove_other" class="warning_article">
           <h2>
             Warning: There can only be one prefect of each gender in each house
           </h2>
@@ -138,8 +156,8 @@
           </div>
         </article>
       </div>
-      <div id="club_warning_section" class="hide">
-        <article id="warning_club">
+      <div id="club_warning_section" class="warning hide">
+        <article id="warning_club" class="warning_article">
           <h2>
             Warning: Only Purebloods or students from Slytherin can be added to
             the Inquisitorial Club
@@ -147,6 +165,13 @@
           <div><button id="close_club_warning">Close warning</button></div>
         </article>
       </div>
+      <div id="hacking_warning_section" class="warning hide">
+        <article id="warning_hacking" class="warning_article">
+          <h2>This student cannot be expelled, because she is too good!!</h2>
+          <div><button id="close_hacking_warning">Close warning</button></div>
+        </article>
+      </div>
+      <button id="hack_button">Hack the system</button>
     </main>
 
     <script src="script.js"></script>
